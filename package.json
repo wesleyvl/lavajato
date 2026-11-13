@@ -1,0 +1,21 @@
+{
+  "name": "laverap-agendamento",
+  "version": "1.0.0",
+  "description": "Sistema de Agendamento Online para Lava Jato Automotivo de Carros e Motos (LAVERAP)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "lava-jato",
+    "agendamento",
+    "detailing",
+    "estetica-automotiva",
+    "motos",
+    "carros",
+    "whatsapp"
+  ],
+  "author": "LAVERAP",
+  "license": "MIT"
+}

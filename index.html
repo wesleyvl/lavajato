@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LAVERAP | Agendamento Online - Lava Jato & Estética para Carros e Motos</title>
+  <meta name="description" content="Agende a lavagem ou estética do seu carro ou moto na LAVERAP em menos de 1 minuto. Sem filas, produtos de alta performance e confirmação via WhatsApp.">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#ecfeff',
+              100: '#cffafe',
+              200: '#a5f3fc',
+              300: '#67e8f9',
+              400: '#22d3ee',
+              500: '#06b6d4',
+              600: '#0891b2',
+              700: '#0e7490',
+              800: '#155e75',
+              900: '#164e63',
+              950: '#083344',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Estilos Customizados -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="text-slate-100 antialiased selection:bg-cyan-500 selection:text-slate-950">
+
+  <!-- Container de Notificações Toast -->
+  <div id="toast-container"></div>
+
+  <!-- ==================== HEADER / NAVBAR ==================== -->
+  <header class="sticky top-0 z-40 w-full glass-panel border-b border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Logo -->
+      <a href="#" class="flex items-center gap-3 group">
+        <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-cyan-600 via-cyan-500 to-blue-500 flex items-center justify-center shadow-lg shadow-cyan-500/25 group-hover:scale-105 transition-transform">
+          <i data-lucide="sparkles" class="w-6 h-6 text-slate-950 stroke-[2.5]"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-1.5">
+            <span class="text-2xl font-black tracking-wider text-white font-display">LAVE<span class="gradient-text">RAP</span></span>
+            <span class="text-[10px] uppercase font-bold tracking-widest px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800/60">Auto & Moto</span>
+          </div>
+          <span class="text-[11px] text-slate-400 block -mt-1 font-medium">Lava Jato & Detailing</span>
+        </div>
+      </a>
+
+      <!-- Menu de Navegação Desktop -->
+      <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-300">
+        <a href="#servicos" class="hover:text-cyan-400 transition-colors">Serviços & Preços</a>
+        <a href="#diferenciais" class="hover:text-cyan-400 transition-colors">Diferenciais</a>
+        <a href="#avaliacoes" class="hover:text-cyan-400 transition-colors">Avaliações</a>
+        <a href="#faq" class="hover:text-cyan-400 transition-colors">Dúvidas</a>
+        <a href="#contato" class="hover:text-cyan-400 transition-colors">Contato</a>
+      </nav>
+
+      <!-- Ações Rápidas -->
+      <div class="flex items-center gap-3">
+        <!-- Botão Consultar Agendamento -->
+        <button id="nav-track-btn" 
+                class="hidden sm:flex items-center gap-2 text-xs font-bold text-slate-300 hover:text-white px-3 py-2 rounded-xl bg-slate-800/60 hover:bg-slate-800 border border-slate-700/60 transition-all">
+          <i data-lucide="search" class="w-4 h-4 text-cyan-400"></i>
+          <span>Consultar Status</span>
+        </button>
+
+        <!-- Botão Área do Gestor -->
+        <button id="nav-admin-btn"
+                title="Acessar Painel do Lava Jato"
+                class="flex items-center gap-1.5 text-xs font-bold text-slate-400 hover:text-cyan-300 px-3 py-2 rounded-xl hover:bg-slate-800/40 border border-transparent hover:border-slate-800 transition-all">
+          <i data-lucide="shield-check" class="w-4 h-4 text-cyan-400"></i>
+          <span class="hidden lg:inline">Painel Admin</span>
+        </button>
+
+        <!-- CTA Agendar Agora -->
+        <a href="#agendamento" 
+           class="px-5 py-2.5 rounded-xl font-bold text-sm bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:-translate-y-0.5 transition-all flex items-center gap-2">
+          <i data-lucide="calendar" class="w-4 h-4 stroke-[2.5]"></i>
+          <span>Agendar</span>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ==================== HERO SECTION ==================== -->
+  <section class="relative pt-14 pb-24 overflow-hidden">
+    <!-- FUNDO DE 2 BOXES COM LAVAGEM DE CARRO COM ESPUMA (SNOW FOAM) -->
+    <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+      <!-- Grid dos 2 Boxes de Lavagem -->
+      <div class="absolute inset-0 grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-cyan-500/30 opacity-70 filter brightness-105 contrast-110">
+        
+        <!-- BOX 1: Lavagem de Carro com Espuma Branca Densa (Snow Foam) -->
+        <div class="relative h-full overflow-hidden bg-slate-950">
+          <img src="https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&w=1600&q=85" 
+               alt="Box 1 - Lavagem de Carro com Espuma Snow Foam" 
+               class="w-full h-full object-cover object-center scale-105">
+          <!-- Identificador do Box 1 -->
+          <div class="absolute top-6 left-6 z-10 flex items-center gap-2">
+            <span class="px-3.5 py-1.5 rounded-full bg-slate-950/85 border border-cyan-400 text-cyan-300 text-xs font-black tracking-widest uppercase shadow-lg shadow-cyan-500/20 backdrop-blur-md flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+              BOX 1 • ESPUMA ATIVA SNOW FOAM
+            </span>
+          </div>
+        </div>
+
+        <!-- BOX 2: Lavagem Técnica & Ducha de Alta Pressão -->
+        <div class="relative h-full overflow-hidden bg-slate-950">
+          <img src="https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?auto=format&fit=crop&w=1600&q=85" 
+               alt="Box 2 - Lavagem Técnica e Enxágue com Espuma" 
+               class="w-full h-full object-cover object-center scale-105">
+          <!-- Identificador do Box 2 -->
+          <div class="absolute top-6 right-6 z-10 flex items-center gap-2">
+            <span class="px-3.5 py-1.5 rounded-full bg-slate-950/85 border border-blue-400 text-blue-300 text-xs font-black tracking-widest uppercase shadow-lg shadow-blue-500/20 backdrop-blur-md flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-blue-400 animate-ping"></span>
+              BOX 2 • LAVAGEM & ENXÁGUE PRO
+            </span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Película de contraste para deixar a espuma visível e o texto 100% legível -->
+      <div class="absolute inset-0 bg-gradient-to-b from-[#090d16]/70 via-[#090d16]/50 to-[#090d16]/85 backdrop-blur-[0.5px]"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-slate-950/20 via-slate-950/50 to-[#090d16]/90"></div>
+    </div>
+
+    <!-- Efeitos de Luz de Fundo -->
+    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-cyan-600/10 blur-[130px] rounded-full pointer-events-none"></div>
+    <div class="absolute -top-20 right-10 w-96 h-96 bg-blue-600/10 blur-[120px] rounded-full pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="text-center max-w-3xl mx-auto">
+        
+        <!-- Badge Superior com Endereço em Rio das Ostras -->
+        <div class="inline-flex flex-wrap items-center justify-center gap-2 px-4 py-2 rounded-full bg-slate-800/90 border border-slate-700 text-cyan-400 text-xs font-bold mb-6 shadow-lg shadow-cyan-950/40">
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+          <span>📍 Rua Recife, 1071 (Casa 4) • Jardim Bela Vista • Rio das Ostras - RJ</span>
+          <span class="text-slate-600 hidden sm:inline">•</span>
+          <span class="text-slate-200">Hora Marcada & Sem Filas</span>
+        </div>
+
+        <!-- Título Principal -->
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.15] mb-6 font-display">
+          Cuidado de Alto Padrão para seu <span class="gradient-text">Carro</span> e sua <span class="gradient-text">Moto</span>.
+        </h1>
+
+        <!-- Subtítulo -->
+        <p class="text-base sm:text-lg text-slate-300 leading-relaxed mb-8 max-w-2xl mx-auto">
+          O melhor lava jato e estética automotiva de <strong class="text-white">Rio das Ostras</strong>. Escolha o serviço ideal, selecione o horário e receba a confirmação direta no WhatsApp com atendimento pontual.
+        </p>
+
+        <!-- Ações do Hero -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-14">
+          <a href="#agendamento" 
+             class="w-full sm:w-auto px-8 py-4 rounded-2xl font-black text-base bg-cyan-500 hover:bg-cyan-400 text-slate-950 shadow-xl shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:scale-[1.02] transition-all flex items-center justify-center gap-3">
+            <i data-lucide="sparkles" class="w-5 h-5 stroke-[2.5]"></i>
+            <span>Agendar Meu Veículo Agora</span>
+          </a>
+
+          <a href="#servicos" 
+             class="w-full sm:w-auto px-6 py-4 rounded-2xl font-bold text-base text-slate-300 hover:text-white bg-slate-900/80 hover:bg-slate-800/80 border border-slate-800 hover:border-slate-700 transition-all flex items-center justify-center gap-2">
+            <i data-lucide="eye" class="w-5 h-5 text-cyan-400"></i>
+            <span>Ver Tabela de Serviços & Preços</span>
+          </a>
+        </div>
+
+        <!-- Badges de Confiança -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-left">
+          <div class="glass-card rounded-2xl p-4 flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 shrink-0">
+              <i data-lucide="car" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <h5 class="text-xs font-bold text-white">Carros & SUVs</h5>
+              <p class="text-[11px] text-slate-400">Hatch a Picapes</p>
+            </div>
+          </div>
+
+          <div class="glass-card rounded-2xl p-4 flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 shrink-0">
+              <i data-lucide="bike" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <h5 class="text-xs font-bold text-white">Especial Moto</h5>
+              <p class="text-[11px] text-slate-400">Desengraxe & Motul</p>
+            </div>
+          </div>
+
+          <div class="glass-card rounded-2xl p-4 flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 shrink-0">
+              <i data-lucide="clock" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <h5 class="text-xs font-bold text-white">Pontualidade</h5>
+              <p class="text-[11px] text-slate-400">Sem espera na fila</p>
+            </div>
+          </div>
+
+          <div class="glass-card rounded-2xl p-4 flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 shrink-0">
+              <i data-lucide="shield-check" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <h5 class="text-xs font-bold text-white">100% Seguro</h5>
+              <p class="text-[11px] text-slate-400">Produtos premium pH</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SEÇÃO PRINCIPAL DE AGENDAMENTO (WIZARD) ==================== -->
+  <section id="agendamento" class="py-16 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Cabeçalho da Seção -->
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="text-xs font-black tracking-widest uppercase text-cyan-400 bg-cyan-950/60 px-3 py-1 rounded-full border border-cyan-800/40">
+          Agendamento Online
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-3 font-display">
+          Personalize seu Agendamento
+        </h2>
+        <p class="text-slate-400 text-sm mt-2">
+          Siga as etapas abaixo para calcular o valor exato e reservar a sua vaga.
+        </p>
+      </div>
+
+      <!-- Barra de Progresso do Wizard (Etapas) -->
+      <div class="max-w-3xl mx-auto mb-10">
+        <div class="flex items-center justify-between relative">
+          <div class="absolute left-0 top-1/2 -translate-y-1/2 w-full h-1 bg-slate-800 -z-0"></div>
+          
+          <!-- Passo 1 -->
+          <div id="step-indicator-1" class="step-item active flex flex-col items-center relative z-10">
+            <div class="step-circle w-10 h-10 rounded-full bg-slate-800 border-2 border-slate-700 flex items-center justify-center font-bold text-sm text-slate-300 transition-all">
+              1
+            </div>
+            <span class="step-label text-xs font-bold text-slate-400 mt-2">Veículo & Serviço</span>
+          </div>
+
+          <!-- Passo 2 -->
+          <div id="step-indicator-2" class="step-item flex flex-col items-center relative z-10">
+            <div class="step-circle w-10 h-10 rounded-full bg-slate-800 border-2 border-slate-700 flex items-center justify-center font-bold text-sm text-slate-300 transition-all">
+              2
+            </div>
+            <span class="step-label text-xs font-bold text-slate-400 mt-2">Data & Horário</span>
+          </div>
+
+          <!-- Passo 3 -->
+          <div id="step-indicator-3" class="step-item flex flex-col items-center relative z-10">
+            <div class="step-circle w-10 h-10 rounded-full bg-slate-800 border-2 border-slate-700 flex items-center justify-center font-bold text-sm text-slate-300 transition-all">
+              3
+            </div>
+            <span class="step-label text-xs font-bold text-slate-400 mt-2">Dados & Confirmação</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Layout em Grid: Formulário + Resumo Fixo Lateral -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- Coluna Esquerda: Conteúdo das Etapas (8 colunas) -->
+        <div class="lg:col-span-8 space-y-6">
+          <form id="booking-form" onsubmit="event.preventDefault();">
+
+            <!-- ================= STEP 1: VEÍCULO & SERVIÇO ================= -->
+            <div id="step-content-1" class="wizard-step-content space-y-8">
+              
+              <!-- Alternador Carro vs Moto -->
+              <div class="glass-panel rounded-2xl p-6">
+                <div class="flex items-center justify-between mb-4">
+                  <div>
+                    <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                      <i data-lucide="check-circle" class="w-5 h-5 text-cyan-400"></i>
+                      Tipo de Veículo
+                    </h3>
+                    <p class="text-xs text-slate-400">Selecione se o agendamento é para carro ou moto</p>
+                  </div>
+                </div>
+
+                <div class="flex p-1.5 rounded-2xl bg-slate-900 border border-slate-800">
+                  <button type="button" id="tab-type-car"
+                          class="flex-1 py-3 px-4 rounded-xl flex items-center justify-center gap-2 font-semibold bg-cyan-500 text-slate-950 shadow-lg shadow-cyan-500/20 transition-all">
+                    <i data-lucide="car" class="w-5 h-5"></i>
+                    <span>Carro</span>
+                  </button>
+                  <button type="button" id="tab-type-moto"
+                          class="flex-1 py-3 px-4 rounded-xl flex items-center justify-center gap-2 font-semibold text-slate-400 hover:text-white hover:bg-slate-800/60 transition-all">
+                    <i data-lucide="bike" class="w-5 h-5"></i>
+                    <span>Moto</span>
+                  </button>
+                </div>
+
+                <!-- Categorias de Porte (Renderizadas via JS) -->
+                <div class="mt-6">
+                  <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-3">Porte / Categoria</span>
+                  <div id="vehicle-categories-container" class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <!-- Injetado dinamicamente via JS -->
+                  </div>
+                </div>
+              </div>
+
+              <!-- Catálogo de Serviços -->
+              <div class="glass-panel rounded-2xl p-6">
+                <div class="mb-5">
+                  <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                    <i data-lucide="sparkle" class="w-5 h-5 text-cyan-400"></i>
+                    Escolha o Serviço Principal
+                  </h3>
+                  <p class="text-xs text-slate-400">Os valores e tempos são calculados conforme a categoria do seu veículo</p>
+                </div>
+
+                <div id="services-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <!-- Injetado dinamicamente via JS -->
+                </div>
+              </div>
+
+              <!-- Opcionais / Adicionais -->
+              <div class="glass-panel rounded-2xl p-6">
+                <div class="mb-4">
+                  <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                    <i data-lucide="plus-circle" class="w-5 h-5 text-cyan-400"></i>
+                    Deseja Adicionar Cuidados Extras? (Opcional)
+                  </h3>
+                  <p class="text-xs text-slate-400">Turbine a estética do seu veículo com tratamentos especializados</p>
+                </div>
+
+                <div id="addons-container" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <!-- Injetado dinamicamente via JS -->
+                </div>
+              </div>
+
+            </div>
+
+            <!-- ================= STEP 2: DATA & HORÁRIO ================= -->
+            <div id="step-content-2" class="wizard-step-content hidden space-y-6">
+              
+              <!-- Seletor de Data -->
+              <div class="glass-panel rounded-2xl p-6">
+                <div class="flex items-center justify-between mb-4">
+                  <div>
+                    <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                      <i data-lucide="calendar" class="w-5 h-5 text-cyan-400"></i>
+                      Selecione a Data
+                    </h3>
+                    <p class="text-xs text-slate-400">Disponibilidade para os próximos 14 dias (Fechado aos domingos)</p>
+                  </div>
+                </div>
+
+                <div id="date-options-container" class="flex gap-2.5 overflow-x-auto pb-3 pt-1 scrollbar-thin">
+                  <!-- Injetado dinamicamente via JS -->
+                </div>
+              </div>
+
+              <!-- Seletor de Horário -->
+              <div class="glass-panel rounded-2xl p-6">
+                <div class="mb-4">
+                  <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                    <i data-lucide="clock" class="w-5 h-5 text-cyan-400"></i>
+                    Selecione o Horário Disponível
+                  </h3>
+                  <p class="text-xs text-slate-400">Horários reservados são bloqueados automaticamente em tempo real</p>
+                </div>
+
+                <div id="time-slots-container">
+                  <!-- Injetado dinamicamente via JS -->
+                </div>
+              </div>
+
+              <!-- Opção de Leva e Traz -->
+              <div class="glass-panel rounded-2xl p-6">
+                <h4 class="text-sm font-bold text-white mb-3 flex items-center gap-2">
+                  <i data-lucide="navigation" class="w-4 h-4 text-cyan-400"></i>
+                  Como deseja ser atendido?
+                </h4>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <label class="glass-card rounded-xl p-4 cursor-pointer flex items-center gap-3 border border-slate-800 hover:border-cyan-500/50 transition-all">
+                    <input type="radio" name="delivery-option" value="balcao" checked class="text-cyan-500 focus:ring-cyan-400 w-4 h-4">
+                    <div>
+                      <span class="text-sm font-bold text-white block">Vou levar até o Lava Jato</span>
+                      <span class="text-xs text-slate-400">Rua Recife, 1071, Casa 4 (Jardim Bela Vista)</span>
+                    </div>
+                  </label>
+
+                  <label class="glass-card rounded-xl p-4 cursor-pointer flex items-center gap-3 border border-slate-800 hover:border-cyan-500/50 transition-all">
+                    <input type="radio" name="delivery-option" value="leva_e_traz" class="text-cyan-500 focus:ring-cyan-400 w-4 h-4">
+                    <div>
+                      <span class="text-sm font-bold text-white block">Solicitar Leva e Traz</span>
+                      <span class="text-xs text-cyan-400 font-semibold">Buscamos e entregamos (taxa sob consulta)</span>
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- ================= STEP 3: DADOS DO CLIENTE & VEÍCULO ================= -->
+            <div id="step-content-3" class="wizard-step-content hidden space-y-6">
+              
+              <div class="glass-panel rounded-2xl p-6">
+                <div class="mb-6">
+                  <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                    <i data-lucide="user-check" class="w-5 h-5 text-cyan-400"></i>
+                    Seus Dados e Identificação do Veículo
+                  </h3>
+                  <p class="text-xs text-slate-400">Utilizamos o WhatsApp para enviar o link de acompanhamento e avisar quando o veículo estiver pronto!</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  
+                  <!-- Nome Completo -->
+                  <div class="sm:col-span-2">
+                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">
+                      Nome Completo *
+                    </label>
+                    <div class="relative">
+                      <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
+                        <i data-lucide="user" class="w-4 h-4"></i>
+                      </div>
+                      <input type="text" id="client-name" required placeholder="Ex: Roberto Carlos Oliveira"
+                             class="w-full pl-10 pr-4 py-3 bg-slate-900 border border-slate-700/80 rounded-xl text-white text-sm focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all">
+                    </div>
+                  </div>
+
+                  <!-- WhatsApp -->
+                  <div>
+                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">
+                      WhatsApp com DDD *
+                    </label>
+                    <div class="relative">
+                      <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-emerald-400">
+                        <i data-lucide="phone" class="w-4 h-4"></i>
+                      </div>
+                      <input type="tel" id="client-phone" required placeholder="(11) 98765-4321"
+                             class="w-full pl-10 pr-4 py-3 bg-slate-900 border border-slate-700/80 rounded-xl text-white text-sm focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all">
+                    </div>
+                    <span class="text-[11px] text-slate-500 mt-1 block">Receba a confirmação e status da lavagem</span>
+                  </div>
+
+                  <!-- Placa do Veículo -->
+                  <div>
+                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">
+                      Placa do Veículo *
+                    </label>
+                    <div class="relative">
+                      <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
+                        <i data-lucide="credit-card" class="w-4 h-4"></i>
+                      </div>
+                      <input type="text" id="vehicle-plate" required placeholder="ABC1D23" maxlength="7"
+                             class="w-full pl-10 pr-4 py-3 bg-slate-900 border border-slate-700/80 rounded-xl text-white text-sm uppercase font-mono tracking-widest font-bold focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all">
+                    </div>
+                    <span class="text-[11px] text-slate-500 mt-1 block">Padrão Mercosul ou antigo</span>
+                  </div>
+
+                  <!-- Marca e Modelo -->
+                  <div class="sm:col-span-2">
+                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">
+                      Marca e Modelo do Veículo *
+                    </label>
+                    <div class="relative">
+                      <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
+                        <i data-lucide="car" class="w-4 h-4"></i>
+                      </div>
+                      <input type="text" id="vehicle-model" required placeholder="Ex: Honda Civic 2022 Preto ou Yamaha MT-07 Azul"
+                             class="w-full pl-10 pr-4 py-3 bg-slate-900 border border-slate-700/80 rounded-xl text-white text-sm focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all">
+                    </div>
+                  </div>
+
+                  <!-- Observações -->
+                  <div class="sm:col-span-2">
+                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">
+                      Observações ou Cuidados Especiais (Opcional)
+                    </label>
+                    <textarea id="booking-notes" rows="2" placeholder="Ex: Cuidado com película nos vidros, veículo rebaixado, chave na ignição..."
+                              class="w-full px-4 py-3 bg-slate-900 border border-slate-700/80 rounded-xl text-white text-sm focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all"></textarea>
+                  </div>
+
+                </div>
+
+                <!-- Aviso de Pagamento -->
+                <div class="mt-6 p-4 rounded-xl bg-cyan-950/40 border border-cyan-800/40 flex items-start gap-3">
+                  <i data-lucide="info" class="w-5 h-5 text-cyan-400 shrink-0 mt-0.5"></i>
+                  <div class="text-xs text-slate-300 leading-relaxed">
+                    <strong class="text-white block mb-0.5">Pagamento seguro na entrega ou retirada:</strong>
+                    Você não precisa pagar agora! O pagamento pode ser feito via Pix, Cartão de Crédito/Débito ou Dinheiro diretamente no lava jato após o término do serviço.
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+          </form>
+        </div>
+
+        <!-- Coluna Direita: Resumo Fixo (4 colunas) -->
+        <div class="lg:col-span-4 sticky top-28 space-y-4">
+          
+          <div class="glass-panel rounded-2xl p-6 border-cyan-500/30 glow-cyan">
+            <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+              <h3 class="font-bold text-white text-base flex items-center gap-2">
+                <i data-lucide="receipt" class="w-5 h-5 text-cyan-400"></i>
+                Resumo do Agendamento
+              </h3>
+              <span class="text-xs px-2 py-0.5 rounded bg-cyan-950 text-cyan-400 border border-cyan-800 font-mono font-bold">LAVERAP</span>
+            </div>
+
+            <!-- Itens do Resumo -->
+            <div class="py-4 space-y-3 text-xs">
+              
+              <div class="flex justify-between items-center text-slate-300">
+                <span class="text-slate-400">Categoria:</span>
+                <span id="summary-category" class="font-bold text-white">Carro Sedã</span>
+              </div>
+
+              <div class="flex justify-between items-center text-slate-300">
+                <span class="text-slate-400">Serviço:</span>
+                <span id="summary-service" class="font-bold text-cyan-300 text-right">Lavagem Completa</span>
+              </div>
+
+              <div class="flex justify-between items-center text-slate-300">
+                <span class="text-slate-400">Tempo Estimado:</span>
+                <span id="summary-duration" class="font-semibold text-slate-300">~1h 10min</span>
+              </div>
+
+              <div class="flex justify-between items-center text-slate-300">
+                <span class="text-slate-400">Data Prevista:</span>
+                <span id="summary-date" class="font-bold text-white">Selecione o dia</span>
+              </div>
+
+              <div class="flex justify-between items-center text-slate-300">
+                <span class="text-slate-400">Horário:</span>
+                <span id="summary-time" class="font-bold text-white">Escolha o horário</span>
+              </div>
+
+              <div class="pt-2 border-t border-slate-800/80">
+                <span class="text-slate-400 block mb-1.5 font-medium">Adicionais selecionados:</span>
+                <div id="summary-addons-list">
+                  <span class="text-xs text-slate-500 italic">Nenhum adicional</span>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Total Estimado -->
+            <div class="pt-4 border-t border-slate-800 flex items-center justify-between">
+              <div>
+                <span class="text-xs text-slate-400 block font-medium">Valor Total Estimado</span>
+                <span class="text-[10px] text-slate-500">Sem cobrança antecipada</span>
+              </div>
+              <div id="summary-total-price" class="text-3xl font-black text-cyan-400 font-display">
+                R$ 75,00
+              </div>
+            </div>
+
+            <!-- Botões de Controle do Wizard -->
+            <div class="pt-6 flex items-center gap-3">
+              <button type="button" id="wizard-btn-prev"
+                      class="hidden px-4 py-3.5 rounded-xl font-bold text-sm bg-slate-800 hover:bg-slate-700 text-slate-300 transition-all">
+                <i data-lucide="arrow-left" class="w-5 h-5"></i>
+              </button>
+
+              <button type="button" id="wizard-btn-next"
+                      class="flex-1 py-3.5 px-6 rounded-xl font-bold text-sm flex items-center justify-center gap-2 bg-cyan-500 hover:bg-cyan-400 text-slate-950 shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 transition-all">
+                <span>Continuar</span>
+                <i data-lucide="arrow-right" class="w-4 h-4 stroke-[2.5]"></i>
+              </button>
+            </div>
+
+            <div class="mt-4 text-center">
+              <span class="text-[11px] text-slate-500 flex items-center justify-center gap-1">
+                <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-400"></i>
+                Confirmação instantânea com dados salvos
+              </span>
+            </div>
+
+          </div>
+
+          <!-- Card de Contato Direto de Apoio -->
+          <div class="glass-card rounded-2xl p-4 text-xs flex items-center justify-between text-slate-300">
+            <div class="flex items-center gap-3">
+              <div class="w-9 h-9 rounded-xl bg-emerald-950 text-emerald-400 flex items-center justify-center shrink-0 border border-emerald-500/30">
+                <i data-lucide="message-circle" class="w-4 h-4"></i>
+              </div>
+              <div>
+                <span class="font-bold text-white block">Dúvida rápida?</span>
+                <span class="text-[11px] text-slate-400 company-phone">(22) 99999-8888</span>
+              </div>
+            </div>
+            <a href="https://wa.me/5522999998888" target="_blank"
+               class="px-3 py-1.5 rounded-lg bg-slate-800 text-cyan-300 font-bold hover:bg-slate-700 transition-all">
+              Chamar
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== TABELA DE SERVIÇOS & PREÇOS ==================== -->
+  <section id="servicos" class="py-20 border-t border-slate-800/60 bg-slate-950/50 backdrop-blur-md relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-xs font-black tracking-widest uppercase text-cyan-400 bg-cyan-950/60 px-3 py-1 rounded-full border border-cyan-800/40">
+          Tabela Transparente
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-3 font-display">
+          Serviços de Estética Automotiva de Precisão
+        </h2>
+        <p class="text-slate-400 text-sm mt-2">
+          Utilizamos apenas produtos biodegradáveis de marcas renomadas (Vonixx, Menzerna, Meguiar's, Motul) para garantir a integridade da pintura e dos materiais.
+        </p>
+      </div>
+
+      <!-- Grid de Destaques dos Serviços -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Card 1 -->
+        <div class="glass-panel rounded-2xl p-6 border-slate-800 hover:border-cyan-500/40 transition-all flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center mb-4">
+              <i data-lucide="droplet" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">Lavagem Técnica Detalhada</h3>
+            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+              Limpeza com pincéis de cerdas ultra-macias em todos os cantos, emblemas, grades frontais e dobradiças de portas. Aplicação de cera pura de carnaúba para profundidade de cor e toque aveludado.
+            </p>
+            <ul class="text-xs text-slate-300 space-y-2 mb-6">
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-cyan-400"></i> Descontaminação de rodas</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-cyan-400"></i> Cera Nobre de Carnaúba</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-cyan-400"></i> Proteção UV dos plásticos</li>
+            </ul>
+          </div>
+          <a href="#agendamento" class="text-xs font-bold text-cyan-400 hover:text-cyan-300 flex items-center gap-1">
+            Agendar Detalhamento <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </a>
+        </div>
+
+        <!-- Card 2 (Especial Motos) -->
+        <div class="glass-panel rounded-2xl p-6 border-cyan-500/40 glow-cyan flex flex-col justify-between relative overflow-hidden">
+          <div class="absolute -right-6 -bottom-6 w-32 h-32 bg-cyan-500/10 rounded-full blur-2xl pointer-events-none"></div>
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-cyan-500 text-slate-950 flex items-center justify-center mb-4 font-black">
+              <i data-lucide="bike" class="w-6 h-6 stroke-[2.5]"></i>
+            </div>
+            <span class="text-[10px] font-bold uppercase tracking-wider bg-cyan-950 text-cyan-300 px-2.5 py-0.5 rounded-full border border-cyan-800">
+              Especialista em Duas Rodas
+            </span>
+            <h3 class="text-xl font-bold text-white mt-2 mb-2">Combo Moto Detailing Pro</h3>
+            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+              Cuidado específico que sua moto merece: desmontagem de proteções para limpeza pesada da relação, secagem por ar comprimido sem resíduos e lubrificação técnica de corrente com Motul C4.
+            </p>
+            <ul class="text-xs text-slate-300 space-y-2 mb-6">
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-cyan-400"></i> Desengraxe 360° da relação</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-cyan-400"></i> Secagem por soprador térmico</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-cyan-400"></i> Lubrificante de alta aderência</li>
+            </ul>
+          </div>
+          <a href="#agendamento" class="text-xs font-bold text-cyan-400 hover:text-cyan-300 flex items-center gap-1">
+            Agendar para Minha Moto <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </a>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="glass-panel rounded-2xl p-6 border-slate-800 hover:border-cyan-500/40 transition-all flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center mb-4">
+              <i data-lucide="shield" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">Higienização Interna & Ozônio</h3>
+            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+              Lavagem por extração profunda de bancos, carpetes e teto. Elimina 99,9% de germes, ácaros e cheiro de mofo ou cigarro com a máquina de oxi-sanitização por ozônio medicinal.
+            </p>
+            <ul class="text-xs text-slate-300 space-y-2 mb-6">
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-cyan-400"></i> Higienização profunda de bancos</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-cyan-400"></i> Oxi-sanitização de ar condicionado</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-cyan-400"></i> Hidratação de couro nobre</li>
+            </ul>
+          </div>
+          <a href="#agendamento" class="text-xs font-bold text-cyan-400 hover:text-cyan-300 flex items-center gap-1">
+            Agendar Higienização <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== DIFERENCIAIS ==================== -->
+  <section id="diferenciais" class="py-20 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <span class="text-xs font-black tracking-widest uppercase text-cyan-400 bg-cyan-950/60 px-3 py-1 rounded-full border border-cyan-800/40">
+            Por Que a LAVERAP?
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-4 font-display leading-tight">
+            Não é apenas um lava jato. É estética e proteção para seu patrimônio.
+          </h2>
+          <p class="text-slate-400 text-sm mt-4 leading-relaxed">
+            Diferente de lava jatos tradicionais que usam produtos agressivos (solupã e ácidos que desgastam verniz e borrachas), na LAVERAP seguimos métodos rigorosos de detalhamento automotivo.
+          </p>
+
+          <div class="mt-8 space-y-4">
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center shrink-0 border border-cyan-500/20">
+                <i data-lucide="sparkles" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <h4 class="text-base font-bold text-white">Método dos Dois Baldes com Grit Guard</h4>
+                <p class="text-xs text-slate-400 mt-0.5">Evita que partículas de terra e areia arranhem a pintura durante a esfregação.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center shrink-0 border border-blue-500/20">
+                <i data-lucide="wind" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <h4 class="text-base font-bold text-white">Secagem por Ar Comprimido & Toalha Twisted</h4>
+                <p class="text-xs text-slate-400 mt-0.5">Sem escorridos chatos pelos retrovisores e maçanetas ao sair na rua.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center shrink-0 border border-emerald-500/20">
+                <i data-lucide="coffee" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <h4 class="text-base font-bold text-white">Lounge de Espera Climatizado</h4>
+                <p class="text-xs text-slate-400 mt-0.5">Wi-Fi ultra-rápido, café expresso de cortesia e mesa para trabalhar enquanto cuidamos da sua máquina.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card Ilustrativo Visual -->
+        <div class="glass-panel rounded-3xl p-8 border-slate-800 relative">
+          <div class="p-6 rounded-2xl bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-800">
+            <div class="flex items-center justify-between mb-6">
+              <span class="text-xs font-bold text-cyan-400 font-mono">STATUS DO BOX DE SERVIÇO</span>
+              <span class="flex items-center gap-1.5 text-xs text-emerald-400 font-bold">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                Box 1 & 2 Operacionais
+              </span>
+            </div>
+
+            <div class="space-y-4">
+              <div class="glass-card rounded-xl p-4 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-lg bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold">
+                    <i data-lucide="car" class="w-5 h-5"></i>
+                  </div>
+                  <div>
+                    <h5 class="text-sm font-bold text-white">Lavagem Completa + Carnaúba</h5>
+                    <p class="text-xs text-slate-400">BMW 320i M Sport • Placa FTL-2023</p>
+                  </div>
+                </div>
+                <span class="text-xs px-2.5 py-1 rounded-full bg-cyan-950 text-cyan-300 font-bold border border-cyan-800">Secando</span>
+              </div>
+
+              <div class="glass-card rounded-xl p-4 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold">
+                    <i data-lucide="bike" class="w-5 h-5"></i>
+                  </div>
+                  <div>
+                    <h5 class="text-sm font-bold text-white">Desengraxe & Lubrificação Motul</h5>
+                    <p class="text-xs text-slate-400">BMW R1250 GS • Placa RTY-9811</p>
+                  </div>
+                </div>
+                <span class="text-xs px-2.5 py-1 rounded-full bg-emerald-950 text-emerald-300 font-bold border border-emerald-800">Pronta</span>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-6 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
+              <span>Agende e garanta sua vaga exclusiva</span>
+              <a href="#agendamento" class="text-cyan-400 font-bold hover:underline">Ir para Agendamento →</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== AVALIAÇÕES DE CLIENTES ==================== -->
+  <section id="avaliacoes" class="py-20 border-t border-slate-800/60 bg-slate-950/50 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <div class="flex items-center justify-center gap-1 text-amber-400 mb-2">
+          <i data-lucide="star" class="w-5 h-5 fill-amber-400"></i>
+          <i data-lucide="star" class="w-5 h-5 fill-amber-400"></i>
+          <i data-lucide="star" class="w-5 h-5 fill-amber-400"></i>
+          <i data-lucide="star" class="w-5 h-5 fill-amber-400"></i>
+          <i data-lucide="star" class="w-5 h-5 fill-amber-400"></i>
+          <span class="text-white font-bold text-sm ml-2">4.9 / 5.0 (Mais de 450 avaliações)</span>
+        </div>
+        <h2 class="text-3xl font-extrabold text-white font-display">
+          Quem conhece, confia na LAVERAP
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <div class="glass-panel rounded-2xl p-6 border-slate-800">
+          <div class="flex items-center gap-1 text-amber-400 mb-3">
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+          </div>
+          <p class="text-xs text-slate-300 leading-relaxed mb-4">
+            "Sempre tive receio de lavar minha moto em lava rápido comum por causa de produtos fortes estragando a corrente e anodizados. O pessoal da LAVERAP usou desengraxante biodegradável e aplicou Motul C4. Ficou zero!"
+          </p>
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-cyan-500/20 text-cyan-400 font-bold flex items-center justify-center text-xs">
+              GF
+            </div>
+            <div>
+              <h5 class="text-xs font-bold text-white">Guilherme Ferreira</h5>
+              <span class="text-[11px] text-slate-500">Yamaha MT-09</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-panel rounded-2xl p-6 border-slate-800">
+          <div class="flex items-center gap-1 text-amber-400 mb-3">
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+          </div>
+          <p class="text-xs text-slate-300 leading-relaxed mb-4">
+            "Agendei pelo site às 10h, cheguei e o box já estava reservado pro meu Civic. Pontualidade impecável e o cheiro do aromatizante deles dura semanas. Recomendo muito!"
+          </p>
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-blue-500/20 text-blue-400 font-bold flex items-center justify-center text-xs">
+              PS
+            </div>
+            <div>
+              <h5 class="text-xs font-bold text-white">Patrícia Silveira</h5>
+              <span class="text-[11px] text-slate-500">Honda Civic Sedã</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-panel rounded-2xl p-6 border-slate-800">
+          <div class="flex items-center gap-1 text-amber-400 mb-3">
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+          </div>
+          <p class="text-xs text-slate-300 leading-relaxed mb-4">
+            "Fiz a higienização com oxi-sanitização porque meu cachorro andava sempre no banco de trás. Sumiu qualquer resquício de odor e pelo. O carro parece saído de concessionária."
+          </p>
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-emerald-500/20 text-emerald-400 font-bold flex items-center justify-center text-xs">
+              MB
+            </div>
+            <div>
+              <h5 class="text-xs font-bold text-white">Marcelo Bittencourt</h5>
+              <span class="text-[11px] text-slate-500">Jeep Compass</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== FAQ (DÚVIDAS FREQUENTES) ==================== -->
+  <section id="faq" class="py-20 relative">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center mb-12">
+        <span class="text-xs font-black tracking-widest uppercase text-cyan-400 bg-cyan-950/60 px-3 py-1 rounded-full border border-cyan-800/40">
+          Tire Suas Dúvidas
+        </span>
+        <h2 class="text-3xl font-extrabold text-white mt-3 font-display">
+          Perguntas Frequentes
+        </h2>
+      </div>
+
+      <div class="space-y-4">
+        
+        <details class="glass-card rounded-2xl p-5 group border border-slate-800 cursor-pointer">
+          <summary class="font-bold text-white text-sm flex items-center justify-between list-none">
+            <span>Preciso pagar adiantado para agendar?</span>
+            <i data-lucide="chevron-down" class="w-4 h-4 text-cyan-400 group-open:rotate-180 transition-transform"></i>
+          </summary>
+          <p class="text-xs text-slate-400 mt-3 leading-relaxed">
+            Não! O agendamento garante o bloqueio do seu horário e a preparação da equipe. O pagamento é realizado apenas na conclusão do serviço, aceitando Pix, Cartão de Crédito/Débito ou Dinheiro.
+          </p>
+        </details>
+
+        <details class="glass-card rounded-2xl p-5 group border border-slate-800 cursor-pointer">
+          <summary class="font-bold text-white text-sm flex items-center justify-between list-none">
+            <span>Como funciona a lavagem de moto na LAVERAP?</span>
+            <i data-lucide="chevron-down" class="w-4 h-4 text-cyan-400 group-open:rotate-180 transition-transform"></i>
+          </summary>
+          <p class="text-xs text-slate-400 mt-3 leading-relaxed">
+            Nós não jogamos jatos de água de alta pressão diretamente em retentores, painéis digitais ou velas. Utilizamos xampu com inibidor de corrosão, desengraxante especial biodegradável para balança e rodas, secagem com soprador de ar comprimido e lubrificação da relação com produtos específicos (Motul / Repsol).
+          </p>
+        </details>
+
+        <details class="glass-card rounded-2xl p-5 group border border-slate-800 cursor-pointer">
+          <summary class="font-bold text-white text-sm flex items-center justify-between list-none">
+            <span>Vocês têm serviço de Leva e Traz?</span>
+            <i data-lucide="chevron-down" class="w-4 h-4 text-cyan-400 group-open:rotate-180 transition-transform"></i>
+          </summary>
+          <p class="text-xs text-slate-400 mt-3 leading-relaxed">
+            Sim! Ao preencher o formulário, selecione a opção "Solicitar Leva e Traz". Nossa equipe calcula a taxa conforme o seu bairro ou condomínio e alinha tudo com você via WhatsApp.
+          </p>
+        </details>
+
+        <details class="glass-card rounded-2xl p-5 group border border-slate-800 cursor-pointer">
+          <summary class="font-bold text-white text-sm flex items-center justify-between list-none">
+            <span>O que acontece se eu me atrasar?</span>
+            <i data-lucide="chevron-down" class="w-4 h-4 text-cyan-400 group-open:rotate-180 transition-transform"></i>
+          </summary>
+          <p class="text-xs text-slate-400 mt-3 leading-relaxed">
+            Temos uma tolerância de 15 minutos de espera. Se precisar remarcar, basta nos enviar uma mensagem no WhatsApp informando seu código de agendamento que ajustamos para o melhor horário disponível sem custo.
+          </p>
+        </details>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== CONTATO & LOCALIZAÇÃO ==================== -->
+  <section id="contato" class="py-16 border-t border-slate-800/60 bg-slate-950/70 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Localização em Rio das Ostras -->
+        <div class="flex items-start gap-4">
+          <div class="w-12 h-12 rounded-2xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center shrink-0 border border-cyan-500/20">
+            <i data-lucide="map-pin" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-1">Onde Estamos</h4>
+            <p class="text-xs text-slate-300 font-semibold company-address leading-relaxed">Rua Recife, 1071, Casa 4 - Jardim Bela Vista</p>
+            <p class="text-xs text-cyan-400 font-bold mt-0.5 company-city">Rio das Ostras - RJ</p>
+            <p class="text-[11px] text-slate-500 mt-1">Ponto de referência: Próximo à entrada do Jardim Bela Vista</p>
+            
+            <div class="flex items-center gap-2 mt-3">
+              <a id="google-maps-btn" href="https://www.google.com/maps/search/?api=1&query=Rua+Recife+1071+Casa+4+Jardim+Bela+Vista+Rio+das+Ostras+RJ" target="_blank"
+                 class="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 hover:border-cyan-500 text-cyan-300 text-xs font-bold transition-all flex items-center gap-1.5">
+                <i data-lucide="navigation" class="w-3.5 h-3.5"></i>
+                <span>Google Maps</span>
+              </a>
+              <a id="waze-btn" href="https://waze.com/ul?q=Rua+Recife+1071+Jardim+Bela+Vista+Rio+das+Ostras" target="_blank"
+                 class="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 hover:border-cyan-500 text-slate-300 hover:text-white text-xs font-bold transition-all flex items-center gap-1.5">
+                <i data-lucide="compass" class="w-3.5 h-3.5"></i>
+                <span>Waze</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Horários -->
+        <div class="flex items-start gap-4">
+          <div class="w-12 h-12 rounded-2xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center shrink-0 border border-cyan-500/20">
+            <i data-lucide="clock" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-1">Funcionamento</h4>
+            <p class="text-xs text-slate-400 company-hours leading-relaxed">Segunda a Sábado, das 08h às 18h</p>
+            <p class="text-xs text-emerald-400 mt-1 font-semibold flex items-center gap-1">
+              <span class="w-2 h-2 rounded-full bg-emerald-400"></span> Domingo: Fechado para descanso
+            </p>
+            <p class="text-[11px] text-slate-500 mt-2">Atendimento no local ou com agendamento prévio online.</p>
+          </div>
+        </div>
+
+        <!-- WhatsApp -->
+        <div class="flex items-start gap-4">
+          <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center shrink-0 border border-emerald-500/20">
+            <i data-lucide="message-circle" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-1">WhatsApp & Contato</h4>
+            <p class="text-xs text-slate-300 font-bold company-phone leading-relaxed">(22) 99999-8888</p>
+            <a href="https://wa.me/5522999998888" target="_blank" class="text-xs text-cyan-400 hover:underline font-bold mt-1 inline-block">
+              Falar no WhatsApp agora →
+            </a>
+            <p class="text-[11px] text-slate-500 mt-1">Dúvidas sobre Leva e Traz em Rio das Ostras</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="py-10 border-t border-slate-800/60 bg-slate-950/80 backdrop-blur-md text-slate-400 text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      
+      <div class="flex flex-col sm:flex-row items-center gap-2 text-center sm:text-left">
+        <span class="font-bold text-white tracking-wider">LAVE<span class="text-cyan-400">RAP</span></span>
+        <span>• Rua Recife, 1071, Casa 4 - Jardim Bela Vista, Rio das Ostras - RJ</span>
+      </div>
+
+      <div class="flex items-center gap-6">
+        <a href="#agendamento" class="hover:text-cyan-400 transition-colors">Agendamento</a>
+        <a href="#servicos" class="hover:text-cyan-400 transition-colors">Serviços</a>
+        <a href="#diferenciais" class="hover:text-cyan-400 transition-colors">Diferenciais</a>
+        <button onclick="document.getElementById('nav-admin-btn').click()" class="text-cyan-500 hover:text-cyan-400 font-bold">
+          Acesso Gerencial
+        </button>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ==================== MODAL DE SUCESSO / TICKET DE CONFIRMAÇÃO ==================== -->
+  <div id="success-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop">
+    <div class="glass-panel rounded-3xl max-w-md w-full p-6 sm:p-8 border-cyan-500/40 glow-cyan relative max-h-[92vh] overflow-y-auto">
+      
+      <!-- Cabeçalho de Sucesso -->
+      <div class="text-center mb-6">
+        <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-emerald-500 to-teal-400 text-slate-950 flex items-center justify-center mx-auto mb-4 shadow-lg shadow-emerald-500/30">
+          <i data-lucide="check" class="w-8 h-8 stroke-[3]"></i>
+        </div>
+        <h3 class="text-2xl font-black text-white font-display">Agendamento Solicitado!</h3>
+        <p class="text-xs text-slate-400 mt-1">Seus dados foram registrados com sucesso no sistema da LAVERAP.</p>
+      </div>
+
+      <!-- Ticket com Detalhes (Área de Impressão) -->
+      <div id="print-ticket-area" class="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-3 text-xs mb-6">
+        <div class="flex justify-between items-center pb-3 border-b border-slate-800">
+          <span class="text-slate-400 font-medium">Código do Agendamento:</span>
+          <span id="modal-ticket-id" class="font-mono font-bold text-cyan-400 text-sm">#LVR-0000</span>
+        </div>
+
+        <div class="flex justify-between items-center">
+          <span class="text-slate-400 font-medium">Cliente:</span>
+          <span id="modal-ticket-name" class="font-bold text-white">Nome do Cliente</span>
+        </div>
+
+        <div class="flex justify-between items-center">
+          <span class="text-slate-400 font-medium">Veículo:</span>
+          <span id="modal-ticket-vehicle" class="font-semibold text-slate-200">Modelo (Placa)</span>
+        </div>
+
+        <div class="flex justify-between items-center">
+          <span class="text-slate-400 font-medium">Serviço:</span>
+          <span id="modal-ticket-service" class="font-bold text-cyan-300">Lavagem Completa</span>
+        </div>
+
+        <div class="flex justify-between items-center">
+          <span class="text-slate-400 font-medium">Data & Horário:</span>
+          <span id="modal-ticket-datetime" class="font-bold text-white">00/00/0000 às 00:00h</span>
+        </div>
+
+        <div class="flex justify-between items-center">
+          <span class="text-slate-400 font-medium">Adicionais:</span>
+          <span id="modal-ticket-addons" class="text-slate-300 font-medium text-right">Nenhum</span>
+        </div>
+
+        <div class="flex justify-between items-center">
+          <span class="text-slate-400 font-medium">Modalidade:</span>
+          <span id="modal-ticket-delivery" class="text-slate-300 font-medium text-right">No Lava Jato</span>
+        </div>
+
+        <div class="flex justify-between items-center pt-3 border-t border-slate-800 text-sm">
+          <span class="font-bold text-white">Valor Total Estimado:</span>
+          <span id="modal-ticket-total" class="font-black text-cyan-400 text-lg">R$ 0,00</span>
+        </div>
+      </div>
+
+      <!-- Botão de Disparo do WhatsApp -->
+      <a id="modal-whatsapp-btn" href="#" target="_blank"
+         class="w-full py-4 px-6 rounded-2xl font-black text-sm bg-emerald-500 hover:bg-emerald-400 text-slate-950 flex items-center justify-center gap-2 shadow-xl shadow-emerald-500/30 transition-all mb-3">
+        <i data-lucide="message-circle" class="w-5 h-5 fill-slate-950"></i>
+        <span>Enviar Agendamento no WhatsApp</span>
+      </a>
+
+      <!-- Ações Secundárias -->
+      <div class="flex items-center gap-2">
+        <button id="modal-print-btn" type="button"
+                class="flex-1 py-3 px-4 rounded-xl font-bold text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center gap-1.5 transition-all">
+          <i data-lucide="printer" class="w-4 h-4"></i>
+          <span>Imprimir</span>
+        </button>
+
+        <button type="button" onclick="closeSuccessModal()"
+                class="flex-1 py-3 px-4 rounded-xl font-bold text-xs bg-slate-800 hover:bg-slate-700 text-white flex items-center justify-center gap-1.5 transition-all">
+          <span>Concluir</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==================== MODAL DE CONSULTA DE STATUS ==================== -->
+  <div id="track-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop">
+    <div class="glass-panel rounded-3xl max-w-md w-full p-6 sm:p-7 border-slate-700 relative">
+      
+      <div class="flex items-center justify-between pb-4 border-b border-slate-800 mb-5">
+        <h4 class="font-bold text-white text-base flex items-center gap-2">
+          <i data-lucide="search" class="w-5 h-5 text-cyan-400"></i>
+          Consultar Agendamento
+        </h4>
+        <button class="close-track-modal text-slate-500 hover:text-white">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div class="mb-4">
+        <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">
+          Digite a Placa, Telefone ou Código #LVR
+        </label>
+        <div class="flex gap-2">
+          <input type="text" id="track-search-input" placeholder="Ex: BRA2E19 ou 11987654321"
+                 class="flex-1 px-4 py-2.5 bg-slate-900 border border-slate-700 rounded-xl text-white text-sm uppercase focus:outline-none focus:border-cyan-400">
+          <button id="track-search-btn"
+                  class="px-4 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-sm transition-all flex items-center justify-center">
+            <i data-lucide="search" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Container de Resultados -->
+      <div id="track-result-container" class="max-h-80 overflow-y-auto">
+        <p class="text-xs text-slate-500 text-center py-6">
+          Informe a placa ou número de telefone cadastrado para visualizar o status do veículo.
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==================== MODAL DO PAINEL DO GESTOR (ADMIN) ==================== -->
+  <div id="admin-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop">
+    <div class="glass-panel rounded-3xl max-w-5xl w-full p-6 sm:p-8 border-cyan-500/30 max-h-[94vh] flex flex-col relative overflow-hidden">
+      
+      <!-- Cabeçalho do Admin -->
+      <div class="flex items-center justify-between pb-5 border-b border-slate-800 shrink-0">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-cyan-500 text-slate-950 flex items-center justify-center font-bold">
+            <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="font-extrabold text-white text-lg font-display">Painel de Gestão • LAVERAP</h3>
+            <p class="text-xs text-slate-400">Controle de agendamentos, faturamento e avisos via WhatsApp</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <button id="admin-reset-demo-btn" title="Restaurar dados de teste"
+                  class="text-xs text-slate-400 hover:text-white px-3 py-1.5 rounded-lg border border-slate-700 hover:bg-slate-800 transition-all flex items-center gap-1">
+            <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+            <span class="hidden sm:inline">Restaurar Exemplo</span>
+          </button>
+          <button class="close-admin-modal text-slate-500 hover:text-white p-1">
+            <i data-lucide="x" class="w-6 h-6"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Cards de Métricas / Faturamento -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 my-5 shrink-0">
+        <div class="glass-card rounded-xl p-3.5 border border-slate-800">
+          <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">Faturamento Previsto (Hoje)</span>
+          <div id="admin-stat-revenue" class="text-xl font-black text-cyan-400 mt-1">R$ 0,00</div>
+        </div>
+
+        <div class="glass-card rounded-xl p-3.5 border border-slate-800">
+          <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">Agendamentos de Hoje</span>
+          <div id="admin-stat-total" class="text-xl font-black text-white mt-1">0</div>
+        </div>
+
+        <div class="glass-card rounded-xl p-3.5 border border-slate-800">
+          <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">Distribuição</span>
+          <div id="admin-stat-vehicles" class="text-sm font-bold text-slate-300 mt-1.5">0 Carros • 0 Motos</div>
+        </div>
+
+        <div class="glass-card rounded-xl p-3.5 border border-slate-800">
+          <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">Pendentes de Confirmação</span>
+          <div id="admin-stat-pending" class="text-xl font-black text-amber-400 mt-1">0</div>
+        </div>
+      </div>
+
+      <!-- Barra de Filtros -->
+      <div class="flex flex-wrap items-center justify-between gap-3 mb-4 shrink-0">
+        <!-- Filtro Data -->
+        <div class="flex items-center gap-1.5 bg-slate-900 p-1 rounded-xl border border-slate-800">
+          <button data-filter="all" class="admin-date-filter px-3 py-1.5 text-xs font-semibold rounded-lg bg-cyan-500 text-slate-950 font-bold transition-all">Todos</button>
+          <button data-filter="today" class="admin-date-filter px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-all">Hoje</button>
+          <button data-filter="tomorrow" class="admin-date-filter px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-all">Amanhã</button>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <!-- Filtro Status -->
+          <select id="admin-status-select" class="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-700 text-xs text-slate-300 font-semibold focus:outline-none">
+            <option value="all">Todos os Status</option>
+            <option value="Pendente">Pendentes</option>
+            <option value="Confirmado">Confirmados</option>
+            <option value="Em Andamento">Em Andamento</option>
+            <option value="Concluído">Concluídos</option>
+            <option value="Cancelado">Cancelados</option>
+          </select>
+
+          <!-- Filtro Veículo -->
+          <select id="admin-vehicle-select" class="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-700 text-xs text-slate-300 font-semibold focus:outline-none">
+            <option value="all">Carros e Motos</option>
+            <option value="car">Apenas Carros</option>
+            <option value="moto">Apenas Motos</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Tabela de Agendamentos -->
+      <div class="flex-1 overflow-y-auto border border-slate-800 rounded-2xl bg-slate-950/60 scrollbar-thin">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="border-b border-slate-800 bg-slate-900/80 text-[11px] font-bold uppercase tracking-wider text-slate-400">
+              <th class="py-3 px-3">Código</th>
+              <th class="py-3 px-3">Cliente / Contato</th>
+              <th class="py-3 px-3">Veículo & Placa</th>
+              <th class="py-3 px-3">Serviço & Preço</th>
+              <th class="py-3 px-3">Data / Hora</th>
+              <th class="py-3 px-3">Status</th>
+              <th class="py-3 px-3 text-right">Ações Rápidas</th>
+            </tr>
+          </thead>
+          <tbody id="admin-appointments-table-body">
+            <!-- Linhas inseridas pelo JS -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Configurações Rápidas do Lava Jato (Rodapé do Admin) -->
+      <div class="mt-4 pt-4 border-t border-slate-800 shrink-0">
+        <details class="text-xs text-slate-400">
+          <summary class="cursor-pointer font-bold text-slate-300 hover:text-white flex items-center gap-1.5">
+            <i data-lucide="settings" class="w-4 h-4 text-cyan-400"></i>
+            Editar Configurações da Empresa (WhatsApp, Telefone, Endereço e Horário)
+          </summary>
+          <div class="grid grid-cols-1 sm:grid-cols-5 gap-3 mt-3 p-3 bg-slate-900/60 rounded-xl border border-slate-800">
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">WhatsApp Recebimento</label>
+              <input type="text" id="cfg-company-phone" class="w-full px-3 py-1.5 bg-slate-900 border border-slate-700 rounded-lg text-white text-xs" placeholder="5522999998888">
+            </div>
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">Telefone Exibido</label>
+              <input type="text" id="cfg-company-display-phone" class="w-full px-3 py-1.5 bg-slate-900 border border-slate-700 rounded-lg text-white text-xs" placeholder="(22) 99999-8888">
+            </div>
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">Endereço Completo</label>
+              <input type="text" id="cfg-company-address" class="w-full px-3 py-1.5 bg-slate-900 border border-slate-700 rounded-lg text-white text-xs" placeholder="Rua Recife, 1071, Casa 4 - Jardim Bela Vista, Rio das Ostras">
+            </div>
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">Horário de Funcionamento</label>
+              <input type="text" id="cfg-company-hours" class="w-full px-3 py-1.5 bg-slate-900 border border-slate-700 rounded-lg text-white text-xs" placeholder="Seg a Sáb, das 08h às 18h">
+            </div>
+            <div class="flex items-end">
+              <button id="admin-save-config-btn"
+                      class="w-full py-2 px-3 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs transition-all flex items-center justify-center gap-1">
+                <i data-lucide="save" class="w-3.5 h-3.5"></i>
+                <span>Salvar</span>
+              </button>
+            </div>
+          </div>
+        </details>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Scripts da Aplicação -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/admin.js"></script>
+
+</body>
+</html>
